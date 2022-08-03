@@ -275,10 +275,10 @@ body {
   border-radius: 12px;
   background: linear-gradient(
     to left,
-    rgb(0, 5, 82) 0%,
-    rgb(35, 0, 163) 8%,
-    rgb(30, 0, 163) 92%,
-    rgb(18, 0, 82) 100%
+    #0084ff 0%,
+    #0084ff 8%,
+    #0084ff 92%,
+    #0084ff 100%
   );
 }
 
@@ -289,7 +289,7 @@ body {
   border-radius: 12px;
   font-size: 1.1rem;
   color: white;
-  background: rgb(72, 0, 240);
+  background: #0084ff;
   will-change: transform;
   transform: translateY(-4px);
   transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
