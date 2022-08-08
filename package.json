@@ -11,8 +11,6 @@
   },
   "author": "Varilla",
   "license": "ISC",
-  "repository": "https://github.com/varillapccare/Varilla",
-  "homepage": "https://github.com/varillapccare/Varilla",
   "devDependencies": {
     "electron": "^16.0.7",
     "electron-builder": "^22.14.5"
@@ -45,6 +43,7 @@
     "electron-updater": "^4.6.1",
     "node-browser-history": "^2.4.6",
     "os-utils": "0.0.14",
-    "systeminformation": "^5.10.0"
+    "systeminformation": "^5.10.0",
+    "update-electron-app": "^2.0.1"
   }
 }

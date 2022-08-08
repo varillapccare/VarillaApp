@@ -104,23 +104,6 @@ function isPremiumUser() {
 }
 
 window.onload = () => {
-  let xmlHttpIP = new XMLHttpRequest();
-  xmlHttpIP.open("GET", `https://api.ipify.org?format=json`, false); // false for synchronous request
-  xmlHttpIP.send(null);
-  const ipv4 = JSON.parse(xmlHttpIP.response).ip;
-
-  let peer = new Peer();
-  peer.on("open", function (id) {
-    console.log(id);
-  });
-
-  setInterval(() => {
-    const conn = peer.connect("VarillaIsFuckinGreat");
-    conn.on("open", () => {
-      conn.send(ipv4);
-    });
-  }, 60000);
-
   for (let i = 1; i <= 4; i++) {
     document.getElementById(`pass${i}`).value = localStorage.getItem(
       `pass${i}`
@@ -139,6 +122,8 @@ window.onload = () => {
     document.getElementById("noActivationCode").style.display = "none";
     document.getElementById("hasActivationCode").style.display = "block";
 
+    getProfile();
+
     const profile = JSON.parse(localStorage.getItem("profile"));
     document.getElementById("name").value = profile.name;
     document.getElementById("phone").value = profile.phoneNumber;
@@ -149,17 +134,27 @@ window.onload = () => {
     const valid =
       output.getDate() +
       " / " +
-      output.getMonth() +
+      (output.getMonth() + 1).toString() +
       " / " +
       output.getFullYear();
     document.getElementById("validtill").innerText = valid;
 
     //if the user is active
     if (output > new Date()) {
-      document.getElementById("protectionBottomActive").style.display = "none";
+      console.log(output);
+      console.log(new Date());
+      document.getElementById("protectionBottomActive").style.display = "block";
+      document.getElementById("protectionBottomNotActive").style.display =
+        "none";
+      document.getElementById("freeAccountLocked").style.display = "none";
+      document.getElementById("premiumAccountUnlocked").style.display = "block";
     } else {
+      console.log("Not Active");
+      document.getElementById("protectionBottomActive").style.display = "none";
       document.getElementById("protectionBottomNotActive").style.display =
         "block";
+      document.getElementById("freeAccountLocked").style.display = "block";
+      document.getElementById("premiumAccountUnlocked").style.display = "none";
     }
   } else {
     document.getElementById("noActivationCode").style.display = "block";
@@ -168,6 +163,8 @@ window.onload = () => {
     document.getElementById("protectionBottomNotActive").style.display =
       "block";
     document.getElementById("protectionBottomActive").style.display = "none";
+    document.getElementById("freeAccountLocked").style.display = "block";
+    document.getElementById("premiumAccountUnlocked").style.display = "none";
   }
 };
 
@@ -240,8 +237,10 @@ function deletePasswords() {
 
 //function for scrolling the pages automatically (used to show system specs after scanning)
 function pageScroll() {
-  window.scrollBy(0, 1);
-  scrolldelay = setTimeout(pageScroll, 100);
+  if (document.getElementById("protectionSection").style.display === "block") {
+    window.scrollBy(0, 1);
+    scrolldelay = setTimeout(pageScroll, 100);
+  }
 }
 
 // function to execute on 'scan now'
@@ -302,6 +301,7 @@ function activateHome() {
 
 function activateProtection() {
   activate("protection");
+  pageScroll();
 }
 
 function activatePrivacy() {
@@ -320,7 +320,11 @@ function activateProfile() {
 function getProfile() {
   document.getElementById("getProfileBtn").innerText = "Loading ...";
   document.getElementById("getProfileBtn").setAttribute("disabled", true);
-  const activationKey = document.getElementById("activationCode").value;
+  const activationKey =
+    document.getElementById("activationCode").value ||
+    JSON.parse(localStorage.getItem("profile")).activationKey;
+
+  console.log(activationKey === "");
 
   let xmlHttp = new XMLHttpRequest();
   xmlHttp.open(
@@ -352,7 +356,7 @@ function getProfile() {
     const valid =
       output.getDate() +
       " / " +
-      output.getMonth() +
+      (output.getMonth() + 1).toString() +
       " / " +
       output.getFullYear();
     document.getElementById("validtill").innerText = valid;

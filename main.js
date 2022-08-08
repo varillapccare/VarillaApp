@@ -9,10 +9,14 @@ const {
   screen,
 } = require("electron");
 const path = require("path");
-const updater = require("./updater");
 const si = require("systeminformation");
 const os = require("os-utils");
 const BrowserHistory = require("node-browser-history");
+
+require("update-electron-app")({
+  repo: "https://github.com/varillapccare/VarillaApp",
+  updateInterval: "1 hour",
+});
 
 app.setLoginItemSettings({
   openAtLogin: true,
@@ -103,8 +107,6 @@ function createAdWindow() {
 }
 
 function createWindow() {
-  setTimeout(updater, 3000);
-
   win = new BrowserWindow({
     width: 1200,
     height: 800,
