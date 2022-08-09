@@ -13,11 +13,6 @@ const si = require("systeminformation");
 const os = require("os-utils");
 const BrowserHistory = require("node-browser-history");
 
-require("update-electron-app")({
-  repo: "https://github.com/varillapccare/VarillaApp",
-  updateInterval: "1 hour",
-});
-
 app.setLoginItemSettings({
   openAtLogin: true,
 });
@@ -141,6 +136,8 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+
+  app.setAppUserModelId("Varilla PC Care");
 
   //main window
   win.on("minimize", (event) => {
