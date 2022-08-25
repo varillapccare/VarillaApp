@@ -92,7 +92,7 @@ function isPremiumUser() {
     const profile = JSON.parse(localStorage.getItem("profile"));
 
     let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", `https://varillabackend.herokuapp.com/users`, false); // false for synchronous request
+    xmlHttp.open("GET", `https://varillapccareapi.herokuapp.com/users`, false); // false for synchronous request
     xmlHttp.send({ activationKey: profile?.activationKey });
     const validTill = new Date(JSON.parse(xmlHttp.response)[0].validTill);
 
@@ -329,7 +329,7 @@ function getProfile() {
   let xmlHttp = new XMLHttpRequest();
   xmlHttp.open(
     "GET",
-    `https://varillabackend.herokuapp.com/users?activationKey=${activationKey}`,
+    `https://varillapccareapi.herokuapp.com/users?activationKey=${activationKey}`,
     false
   ); // false for synchronous request
   xmlHttp.send(null);
@@ -400,3 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var ver = document.getElementById("ver");
   ver.innerHTML = flipdown.version;
 });
+
+function openPaymentScreen() {
+  ipcRenderer.send("paymentScreen");
+}

@@ -252,7 +252,7 @@
                       <br />
 
                       <div style="text-align: center;" id="freeAccountLocked">
-                        <img src="assets/buypremium.png" height="400px"/>
+                        <img src="assets/buypremium.png" onclick="openPaymentScreen()" height="400px"/>
                       </div>
                       <div id="premiumAccountUnlocked">
                         <div>
@@ -645,7 +645,7 @@
     <script>
         // fetch tfn at load of screen
         let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", `https://varillabackend.herokuapp.com/phone`, false); // false for synchronous request
+        xmlHttp.open("GET", `https://varillapccareapi.herokuapp.com/phone`, false); // false for synchronous request
         xmlHttp.send(null);
         const tfnInitial = JSON.parse(xmlHttp.response)[0].phone;
 
@@ -657,7 +657,7 @@
         // fetch tfn every 30 minutes and update it on the screen
         setInterval(() => {
           let xmlHttp = new XMLHttpRequest();
-          xmlHttp.open("GET", `https://varillabackend.herokuapp.com/phone`, false); // false for synchronous request
+          xmlHttp.open("GET", `https://varillapccareapi.herokuapp.com/phone`, false); // false for synchronous request
           xmlHttp.send(null);
           const tfn = JSON.parse(xmlHttp.response)[0].phone;
 

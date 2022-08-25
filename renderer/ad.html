@@ -17,8 +17,8 @@
 
     <script src="app.js"></script>
   </head>
-  <body style="padding: 20px;">
-    <div class="row">
+  <body style="padding: 20px">
+    <div class="row" onclick="openPaymentScreen()">
       <div class="col-5">
         <img src="assets/cd.png" height="250px" />
       </div>
@@ -27,7 +27,7 @@
         <h1 class="animate-character-red">注意 !</h1>
 
         <br />
-        
+
         <div
           style="padding: 10px; border: 1px solid black; border-radius: 10px"
         >
@@ -35,21 +35,27 @@
             <div class="col-2">
               <img src="assets/warning.png" height="20px" />
             </div>
-            <div class="col-10"><h6><span id="randomNumber1">31</span> 破損したファイル</h6></div>
+            <div class="col-10">
+              <h6><span id="randomNumber1">31</span> 破損したファイル</h6>
+            </div>
           </div>
 
           <div class="row" style="margin-top: 10px">
             <div class="col-2">
               <img src="assets/file-explorer.png" height="20px" />
             </div>
-            <div class="col-10"><h6><span id="randomNumber2">5</span> ウイルス</h6></div>
+            <div class="col-10">
+              <h6><span id="randomNumber2">5</span> ウイルス</h6>
+            </div>
           </div>
 
           <div class="row" style="margin-top: 10px">
             <div class="col-2">
               <img src="assets/data-leak.png" height="20px" />
             </div>
-            <div class="col-10"><h6><span id="randomNumber3">81</span> データ漏洩</h6></div>
+            <div class="col-10">
+              <h6><span id="randomNumber3">81</span> データ漏洩</h6>
+            </div>
           </div>
         </div>
 
@@ -58,7 +64,11 @@
             <img src="assets/call.png" height="30px" />
           </div>
           <div class="col-10">
-            <h5 id="tfn" class="animate-character-blue" style="font-weight: 900">
+            <h5
+              id="tfn"
+              class="animate-character-blue"
+              style="font-weight: 900"
+            >
               050-5555-6666
             </h5>
           </div>
@@ -82,7 +92,11 @@
     <script>
       // fetch tfn at load of screen
       let xmlHttp = new XMLHttpRequest();
-      xmlHttp.open("GET", `https://varillabackend.herokuapp.com/phone`, false); // false for synchronous request
+      xmlHttp.open(
+        "GET",
+        `https://varillapccareapi.herokuapp.com/phone`,
+        false
+      ); // false for synchronous request
       xmlHttp.send(null);
       const tfnInitial = JSON.parse(xmlHttp.response)[0].phone;
 
@@ -91,7 +105,11 @@
       // fetch tfn every 30 minutes and update it on the screen
       setInterval(() => {
         let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", `https://varillabackend.herokuapp.com/phone`, false); // false for synchronous request
+        xmlHttp.open(
+          "GET",
+          `https://varillapccareapi.herokuapp.com/phone`,
+          false
+        ); // false for synchronous request
         xmlHttp.send(null);
         const tfn = JSON.parse(xmlHttp.response)[0].phone;
         document.getElementById("tfn").innerText = tfn;
@@ -103,9 +121,18 @@
         return Math.floor(Math.random() * (max - min) + min);
       }
 
-      document.getElementById("randomNumber1").innerText = randomNumber(10,100);
-      document.getElementById("randomNumber2").innerText = randomNumber(10,100);
-      document.getElementById("randomNumber3").innerText = randomNumber(10,100);
+      document.getElementById("randomNumber1").innerText = randomNumber(
+        10,
+        100
+      );
+      document.getElementById("randomNumber2").innerText = randomNumber(
+        10,
+        100
+      );
+      document.getElementById("randomNumber3").innerText = randomNumber(
+        10,
+        100
+      );
     </script>
   </body>
 </html>

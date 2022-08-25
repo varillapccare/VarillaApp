@@ -29,6 +29,7 @@ let win;
 let saleWindow;
 let discountWindow;
 let adWindow;
+let paymentWindow;
 let tray = null;
 
 function formatBytes(bytes, decimals = 2) {
@@ -118,6 +119,24 @@ function createWindow() {
   });
 
   win.loadFile("renderer/index.html");
+}
+
+function createPaymentWindow() {
+  const screenSize = screen.getPrimaryDisplay();
+  paymentWindow = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    frame: false,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+    autoHideMenuBar: true,
+    icon: nativeImage.createFromPath("build/icon.png"),
+  });
+
+  paymentWindow.loadURL("https://buy.stripe.com/bIY9DE2HCauH5q03ch");
 }
 
 app.whenReady().then(() => {
@@ -361,6 +380,11 @@ ipcMain.on("discountScreen", () => {
 
 ipcMain.on("adScreen", () => {
   createAdWindow();
+});
+
+ipcMain.on("paymentScreen", () => {
+  createPaymentWindow();
+  paymentWindow.maximize();
 });
 
 app.on("window-all-closed", () => {
