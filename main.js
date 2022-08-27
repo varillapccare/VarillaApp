@@ -145,7 +145,7 @@ app.whenReady().then(() => {
   createSaleWindow();
   createDiscountWindow();
   setTimeout(() => {
-    // adWindow.hide();
+    adWindow.hide();
     saleWindow.hide();
     discountWindow.hide();
   }, 500);
