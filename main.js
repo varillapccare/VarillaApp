@@ -136,7 +136,7 @@ function createPaymentWindow() {
     icon: nativeImage.createFromPath("build/icon.png"),
   });
 
-  paymentWindow.loadURL("https://buy.stripe.com/bIY9DE2HCauH5q03ch");
+  paymentWindow.loadURL("https://varilla.jp/specialpageforapp.html");
 }
 
 app.whenReady().then(() => {
@@ -145,7 +145,7 @@ app.whenReady().then(() => {
   createSaleWindow();
   createDiscountWindow();
   setTimeout(() => {
-    adWindow.hide();
+    // adWindow.hide();
     saleWindow.hide();
     discountWindow.hide();
   }, 500);
