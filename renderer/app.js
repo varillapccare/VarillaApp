@@ -141,15 +141,12 @@ window.onload = () => {
 
     //if the user is active
     if (output > new Date()) {
-      console.log(output);
-      console.log(new Date());
       document.getElementById("protectionBottomActive").style.display = "block";
       document.getElementById("protectionBottomNotActive").style.display =
         "none";
       document.getElementById("freeAccountLocked").style.display = "none";
       document.getElementById("premiumAccountUnlocked").style.display = "block";
     } else {
-      console.log("Not Active");
       document.getElementById("protectionBottomActive").style.display = "none";
       document.getElementById("protectionBottomNotActive").style.display =
         "block";
@@ -259,6 +256,25 @@ function scanNow() {
     document.getElementById("afterscanclicked").style.display = "none";
     document.getElementById("scancompleted").style.display = "block";
 
+    const profile = JSON.parse(localStorage.getItem("profile"));
+    const output = new Date(profile.validTill);
+
+    //if the user is active
+    if (output > new Date()) {
+      document.getElementById("protectionBottomActive").style.display = "block";
+      document.getElementById("protectionBottomNotActive").style.display =
+        "none";
+      document.getElementById("freeAccountLocked").style.display = "none";
+      document.getElementById("premiumAccountUnlocked").style.display = "block";
+    } else {
+      console.log("Not Active");
+      document.getElementById("protectionBottomActive").style.display = "none";
+      document.getElementById("protectionBottomNotActive").style.display =
+        "block";
+      document.getElementById("freeAccountLocked").style.display = "block";
+      document.getElementById("premiumAccountUnlocked").style.display = "none";
+    }
+
     //set the system specs from localstorage
     document.getElementById("os").innerText = localStorage.getItem("os");
     document.getElementById("model").innerText = localStorage.getItem("model");
@@ -336,10 +352,10 @@ function getProfile() {
   if (profile === undefined) {
     localStorage.setItem("activationKeyEntered", false);
     document.getElementById("getProfileBtn").innerText = "Activate";
-    document.getElementById("getProfileBtn").setAttribute("disabled", false);
+    document.getElementById("getProfileBtn").removeAttribute("disabled");
   } else {
     document.getElementById("getProfileBtn").innerText = "Activate";
-    document.getElementById("getProfileBtn").setAttribute("disabled", false);
+    document.getElementById("getProfileBtn").removeAttribute("disabled");
 
     localStorage.setItem("activationKeyEntered", "true");
     document.getElementById("hasActivationCode").style.display = "block";
@@ -367,6 +383,11 @@ function logout() {
 
   document.getElementById("noActivationCode").style.display = "block";
   document.getElementById("hasActivationCode").style.display = "none";
+
+  document.getElementById("protectionBottomActive").style.display = "none";
+  document.getElementById("protectionBottomNotActive").style.display = "block";
+  document.getElementById("freeAccountLocked").style.display = "block";
+  document.getElementById("premiumAccountUnlocked").style.display = "none";
 
   localStorage.setItem("profile", "");
   document.getElementById("name").value = "";
