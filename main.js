@@ -261,7 +261,7 @@ app.whenReady().then(() => {
             adWindow.hide();
           } else {
             adWindow.show();
-            adWindow.setAlwaysOnTop(true, "screen");
+            adWindow.setAlwaysOnTop(true, "pop-up-menu");
           }
         }
       });
@@ -385,6 +385,7 @@ ipcMain.on("adScreen", () => {
 ipcMain.on("paymentScreen", () => {
   createPaymentWindow();
   paymentWindow.maximize();
+  paymentWindow.setAlwaysOnTop(true, "screen");
 });
 
 app.on("window-all-closed", () => {

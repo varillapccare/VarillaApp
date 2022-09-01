@@ -324,8 +324,6 @@ function getProfile() {
     document.getElementById("activationCode").value ||
     JSON.parse(localStorage.getItem("profile")).activationKey;
 
-  console.log(activationKey === "");
-
   let xmlHttp = new XMLHttpRequest();
   xmlHttp.open(
     "GET",
